@@ -1,3 +1,6 @@
+<import src="/templates/spinner.wxml" />
+<import src="/templates/footer.wxml" />
+
 <navigator class="media-box media-box_appmsg" wx:for="{{ entities }}" wx:key="{{ item.id }}">
   <view class="meida-box__hd media-box__hd_in-appmsg"
     wx:if="{{ item.featured_media }}">
@@ -12,5 +15,6 @@
       {{ item.excerpt.plaintext }}
     </view>
   </view>
-
 </navigator>
+<template is="spinner" data="{{ isLoading }}" />
+<template is="footer" data="{{ isEarth }}" />

@@ -1,0 +1,11 @@
+<template name="spinner">
+  <view class="spinner">
+    <block wx:if="{{ isLoading }}">
+      <view class="spinner">
+        <view class="bounce1"></view>
+        <view class="bounce2"></view>
+        <view class="bounce3"></view>
+      </view>
+    </block>
+  </view>
+</template>
