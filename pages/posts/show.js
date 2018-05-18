@@ -4,7 +4,7 @@ const { towxml } = app
 const API_BASE = 'https://sandbox.lekee.cc/wp-json'
 const API_ROUTE = 'wp/v2/posts'
 
-Page ({
+Page({
   data: {
     title: '',
     content: {},
@@ -14,7 +14,7 @@ Page ({
   },
   onLoad (options) {
     const id = options.id
-    // const id = 57
+    // const id = 31
 
     wx.request({
       url: `${ API_BASE }/${ API_ROUTE }/${ id }?_embed=true`,

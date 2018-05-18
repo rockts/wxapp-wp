@@ -15,10 +15,39 @@
   <view class="cell">
     <view class="cell__bd">
       <textarea
+        style="height: 6"
         value="{{ entity.content }}"
         class="textarea"
         placeholder="正文"
         bindinput="onInputContent" />
+    </view>
+  </view>
+  <view class="cell">
+    <view class="cell__bd">
+      <view class="uploader">
+        <view class="uploader__hd">
+          <view class="uploader__info">{{ images.length }} / 1</view>
+        </view>
+        <view class="uploader__bd">
+          <view class="uploader__files">
+            <block wx:for="{{ images }}" wx:key="item.path">
+              <view class="uploader__file"
+                bindtap="onPreviewImage"
+                bindlongpress="onLongpressImage"
+                data-id="{{ item.id }}"
+                data-src="{{ item.path }}">
+                <image class="uploader__img"
+                  src="{{ item.path }}"
+                  mode="aspectFill" />
+                <progress percent="{{ progress[index] }}" />
+              </view>
+            </block>
+          </view>
+          <view class="uploader__input-box">
+            <view class="uploader__input" bindtap="onChooseImage"></view>
+          </view>
+        </view>
+      </view>
     </view>
   </view>
 </view>
