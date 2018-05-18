@@ -78,7 +78,7 @@ page {
   margin: 0;
 }
 
-.prifile {
+.profile {
   display: flex;
   flex-direction: column;
   justify-content: space-between;

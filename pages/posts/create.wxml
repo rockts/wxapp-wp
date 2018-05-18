@@ -15,7 +15,7 @@
   <view class="cell">
     <view class="cell__bd">
       <textarea
-        style="height: 6"
+        style="height: 6em"
         value="{{ entity.content }}"
         class="textarea"
         placeholder="正文"
@@ -57,7 +57,7 @@
     <view class="cell__bd">
       发布
     </view>
-    <view class="celll__ft">
+    <view class="cell__ft">
       <switch
         checked="{{ entity.status === 'publish' }}"
         bindchange="onChangeStatus" />
@@ -65,7 +65,7 @@
   </view>
 </view>
 <view class="btn-area">
-  <button class="btn " type="primary"
+  <button class="btn" type="primary"
     disabled="{{ !entity.title || !entity.content }}"
     loading="{{ isLoading }}"
     plain="{{ entity.status !== 'publish' }}"

@@ -1,11 +1,13 @@
+import {
+  API_BASE,
+  API_ROUTE_USER_REGISTER,
+  API_ROUTE_JWT_TOKEN
+} from '../../config/api'
+
+import { weixinBind } from '../../libs/weixin'
+
 const app = getApp()
 const { setJWT } = app
-
-const API_BASE = 'https://sandbox.lekee.cc/wp-json'
-const API_ROUTE = 'jwt-auth/v1/token'
-const API_ROUTE_USER_REGISTER = 'users/v1/register'
-const API_ROUTE_JWT_TOKEN = 'jwt-auth/v1/token'
-
 
 Page({
   data: {
@@ -93,9 +95,29 @@ Page({
                 if (response.statusCode === 200) {
                   setJWT(response.data)
 
+                  if (this.data.bind) {
+                    wx.getUserInfo({
+                      success: (userInfo) => {
+                        if (userInfo) {
+                          weixinBind({
+                            userInfo,
+                            userId: response.data.user_id,
+                            token: response.data.token
+                          })
+                        }
+                      }
+                    })
+                  }
 
+                  const flash = JSON.stringify(
+                    {
+                      action: 'bindWeixin',
+                      message: '绑定微信帐号'
+                    }
+                  )
 
-      
+                  wx.setStorageSync('flash', flash)
+
                   wx.switchTab({
                     url: '/pages/users/show'
                   })

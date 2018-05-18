@@ -1,7 +1,9 @@
-const app = getApp()
+import {
+  API_BASE,
+  API_ROUTE_POSTS
+} from '../../config/api'
 
-const API_BASE = 'https://sandbox.lekee.cc/wp-json'
-const API_ROUTE = 'wp/v2/posts'
+const app = getApp()
 
 Page({
   data: {
@@ -15,7 +17,7 @@ Page({
   },
   onLoad () {
     wx.request({
-      url: `${ API_BASE }/${ API_ROUTE }?_embed=${ this.data.embed }`,
+      url: `${ API_BASE }/${ API_ROUTE_POSTS }?_embed=${ this.data.embed }`,
       success: (response) => {
         console.log(response)
         const entities = response.data
@@ -30,9 +32,9 @@ Page({
       }
     })
   },
-  onPullDownRefresh() {
+  onPullDownRefresh () {
     wx.request({
-      url: `${ API_BASE }/${ API_ROUTE }?_embed=${ this.data.embed }`,
+      url: `${ API_BASE }/${ API_ROUTE_POSTS }?_embed=${ this.data.embed }`,
       success: (response) => {
         console.log(response)
         const entities = response.data
@@ -62,7 +64,7 @@ Page({
     currentPage = currentPage + 1
 
     wx.request({
-      url: `${ API_BASE }/${ API_ROUTE }?_embed=${ this.data.embed }&page=${ currentPage }`,
+      url: `${ API_BASE }/${ API_ROUTE_POSTS }?_embed=${ this.data.embed }&page=${ currentPage }`,
       success: (response) => {
         console.log(response)
         const entities = [...this.data.entities, ...response.data]

@@ -1,15 +1,26 @@
+import {
+  API_BASE,
+  API_ROUTE_JWT_TOKEN
+} from '../../config/api'
+
+import { weixinBind } from '../../libs/weixin'
+
 const app = getApp()
 const { setJWT } = app
-
-const API_BASE = 'https://sandbox.lekee.cc/wp-json'
-const API_ROUTE = 'jwt-auth/v1/token'
 
 Page({
   data: {
     username: '',
     password: '',
     showMessage: false,
-    message: ''
+    message: '',
+    bind: false
+  },
+  onLoad (options) {
+    const bind = options.bind ? true : false
+    this.setData({
+      bind
+    })
   },
   onInputUsername (event) {
     this.setData({
@@ -21,11 +32,16 @@ Page({
       password: event.detail.value
     })
   },
+  onTapRegisterButton () {
+    wx.navigateTo({
+      url: '/pages/users/register?bind=true'
+    })
+  },
   onTapSubmitButton () {
     console.log(this.data.username, this.data.password)
 
     wx.request({
-      url: `${ API_BASE }/${ API_ROUTE }`,
+      url: `${ API_BASE }/${ API_ROUTE_JWT_TOKEN }`,
       method: 'POST',
       data: {
         username: this.data.username,
@@ -49,7 +65,7 @@ Page({
               break
             default:
               this.setData({
-                message: '请检查用户和密码'
+                message: '请检查用户名或密码'
               })
           }
         }
@@ -68,6 +84,21 @@ Page({
             break
           case 200:
             setJWT(response.data)
+
+            if (this.data.bind) {
+              wx.getUserInfo({
+                success: (userInfo) => {
+                  if (userInfo) {
+                    weixinBind({
+                      userInfo,
+                      userId: response.data.user_id,
+                      token: response.data.token
+                    })
+                  }
+                }
+              })
+            }
+
             wx.switchTab({
               url: '/pages/users/show'
             })
@@ -78,5 +109,4 @@ Page({
       }
     })
   }
-
 })

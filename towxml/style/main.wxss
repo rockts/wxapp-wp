@@ -67,7 +67,7 @@
     background-color:red;
 }
 .h2w__colgroup {
-    display:table-column-group;
+    display:table-column-group；
 }
 .h2w__col {
     display:table-column;
@@ -211,7 +211,7 @@
 .h2w__strong,
 .h2w__i,
 .h2w__em {
-    display:inline;
+    display:inline-block;
 }
 
 .h2w__b,
@@ -276,11 +276,11 @@
 
 /**内置元素**/
 image,video {
-    width:100%; margin:0 auto 20rpx auto;
+    /*width:100%; margin:0 auto 20rpx auto;*/
 }
 
 image {
-	height:auto;
+	/*height:auto;*/
 }
 video {
 	height:220px;

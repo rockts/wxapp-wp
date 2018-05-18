@@ -3,13 +3,12 @@
 
 <template is="spinner" data="{{ isLoading }}" />
 
-
 <view class="featured-media" wx:if="{{ featuredMedia }}">
   <image mode="aspectFill" src="{{ featuredMedia }}" />
 </view>
 
 <view class="article">
-  <view class="article__h1"> {{ title }} </view>
+  <view class="article__h1">{{ title }}</view>
   <view class="article__section">
     <view class="article__p">
       <template is="entry" data="{{ ...content }}" />
