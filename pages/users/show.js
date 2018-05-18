@@ -1,5 +1,7 @@
 const app = getApp()
-const { removeJWT } = app
+const { removeJWT, setJWT } = app
+
+const API_BASE = 'https://sandbox.lekee.cc/wp-json'
 
 Page({
   data: {
@@ -25,6 +27,11 @@ Page({
   onTapLoginButton () {
     wx.navigateTo({
       url: '/pages/users/login'
+    })
+  },
+  onTapRegisterButton () {
+    wx.navigateTo({
+      url: '/pages/users/register'
     })
   }
 })
