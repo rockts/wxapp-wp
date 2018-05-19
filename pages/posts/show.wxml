@@ -1,7 +1,7 @@
 <import src="/towxml/entry.wxml" />
 <import src="/templates/spinner.wxml" />
+<import src="/templates/footer.wxml" />
 
-<template is="spinner" data="{{ isLoading }}" />
 
 <view class="featured-media" wx:if="{{ featuredMedia }}"  wx:if="{{ false }}">
   <image mode="aspectFill" src="{{ featuredMedia }}" />
@@ -19,6 +19,9 @@
     </view>
   </view>
   <view class="comments" wx:if="{{ comments.length }}">
+    <view class="comments__meta" wx:if="{{ total }}">
+      {{  total }} 条评论
+    </view>
     <view class="comment" wx:for="{{ comments }}" wx:key="{{ item.id }}">
       <view class="comment__avatar">
         <image class="comment__avatar_img" src="{{ item.author_avatar_urls['48'] }}"/>
@@ -31,10 +34,40 @@
           - <text class="comment__content_author">{{ item.reply.author_name }}</text>
           <text class="comment__content_date">{{ item.reply.fromNow }}</text>
         </view>
-        <view class="comment__content_body">
+        <view class="comment__content_body"
+          bindtap="onTapComment"
+          data-id="{{ item.id }}"
+          data-author="{{ item.author_name }}">
           <template is="entry" data="{{ ...item.content.wxml }}" />
         </view>
       </view>
     </view>
   </view>
+</view>
+
+<view class="bottom">
+  <template is="spinner" data="{{ isLoading }}" />
+  <template is="footer" data="{{ isEarth }}" />
+</view>
+
+<view class="toolbar">
+  <view class="toolbar__overlay" wx:if="{{ !loggedIn }}">
+    <view class="toolbar__overlay_text">评论？请先登录</view>
+    <view class="toolbar__overlay_button">
+      <button type="primary" size="mini" bindtap="onTapLoginButton">
+        登录
+      </button>
+    </view>
+  </view>
+  <input
+    class="toolbar__input"
+    confirm-type="send"
+    disabled="{{ !loggedIn }}"
+    value="{{ commentw.content }}"
+    focus="{{ focus }}"
+    placeholder="{{ placeholder? placeholder : '添加评论 ...'  }}"
+    bindinput="onInputComment"
+    bindblur="onBlurComment"
+    bindconfirm="onSubmitComment"
+    />
 </view>
