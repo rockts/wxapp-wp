@@ -1,15 +1,15 @@
 {
   "pages": [
+    "pages/posts/show",
     "pages/users/show",
     "pages/users/register",
     "pages/posts/create",
     "pages/index/index",
     "pages/users/login",
-    "pages/posts/show",
     "pages/demo/demo"
   ],
   "window": {
-    "navigationBarTitleText": "lekee.cc",
+    "navigationBarTitleText": "基于wp的小程序",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTextStyle": "black",
     "enablePullDownRefresh": true,
